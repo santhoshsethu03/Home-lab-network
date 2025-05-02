@@ -1,0 +1,119 @@
+R1>en
+R1#sh run
+Building configuration...
+
+Current configuration : 1605 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R1
+!
+!
+!
+!
+ip dhcp excluded-address 10.0.0.0 10.0.0.10
+ip dhcp excluded-address 20.0.0.0 20.0.0.10
+ip dhcp excluded-address 30.0.0.0 30.0.0.10
+ip dhcp excluded-address 40.0.0.0 40.0.0.10
+!
+ip dhcp pool vlan10
+ network 10.0.0.0 255.0.0.0
+ default-router 10.0.0.1
+ip dhcp pool vlan20
+ network 20.0.0.0 255.0.0.0
+ default-router 20.0.0.1
+ip dhcp pool vlan30
+ network 30.0.0.0 255.0.0.0
+ default-router 30.0.0.1
+ip dhcp pool vlan40
+ network 40.0.0.0 255.0.0.0
+ default-router 40.0.0.1
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2811/K9 sn FTX1017AYRH-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 10.0.0.1 255.0.0.0
+!
+interface FastEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 20.0.0.1 255.0.0.0
+!
+interface FastEthernet0/0.30
+ encapsulation dot1Q 30
+ ip address 30.0.0.1 255.0.0.0
+!
+interface FastEthernet0/0.40
+ encapsulation dot1Q 40
+ ip address 40.0.0.1 255.0.0.0
+!
+interface FastEthernet0/1
+ ip address 172.16.0.1 255.255.0.0
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ log-adjacency-changes
+ network 10.0.0.0 0.255.255.255 area 0
+ network 20.0.0.0 0.255.255.255 area 0
+ network 30.0.0.0 0.255.255.255 area 0
+ network 40.0.0.0 0.255.255.255 area 0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+
